@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill('T_PA_ACCTNT');
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill('Welcome@123');
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('tab', { name: 'Projects & Assets' }).getByLabel('More').click();
+  await page.getByRole('menuitem', { name: 'Transactions' }).click();
+  await page.getByRole('link', { name: 'Acquis. w/Autom. Offsetting' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Company Code Required' }).fill('1000');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().locator('tr').filter({ hasText: /^Main Asset Number$/ }).getByLabel('Existing Asset').click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().locator('tr').filter({ hasText: /^Main Asset Number$/ }).getByLabel('Existing Asset').fill('23993618');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().locator('tr').filter({ hasText: /^Main Asset Number$/ }).getByLabel('Existing Asset').press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Document Date' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Document Date' }).fill('01.04.2026');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Document Date' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Posting Date Required' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Posting Date Required' }).press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Posting Date Required' }).fill('21.04.2026');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Posting Date Required' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).fill('200');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByTitle('Quantity').click();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByTitle('Quantity').fill('1');
+  // await page.pause();
+  await page.locator('iframe[name="application-ZGUI-ABZON-iframe"]').contentFrame().getByRole('button', { name: 'Post  Emphasized' }).click();
+  await page.waitForTimeout(5000);
+});

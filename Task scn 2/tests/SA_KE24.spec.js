@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapts4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME11);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD11);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('button', { name: 'More' }).click();
+  await page.getByRole('menuitem', { name: 'Reporting - Review and' }).click();
+  await page.getByRole('link', { name: 'Display Actual Line Items' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().locator('#ls-inputfieldhelpbutton').click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('gridcell', { name: 'Row selected. To deselect the' }).locator('div').click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'OK  Emphasized' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'Get variant...' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).fill('');
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByTitle('Execute (F8)').click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'Search (Ctrl+F)' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('textbox', { name: 'Search Term' }).fill('S/SINVESTIGATE');
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('textbox', { name: 'Search Term' }).press('Enter');
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('dialog', { name: 'Find' }).getByLabel('Close').click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByText('S/SINVESTIGATE', { exact: true }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'Continue (Enter)' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().locator('#ls-inputfieldhelpbutton').click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('gridcell', { name: 'Row selected. To deselect the' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'OK  Emphasized' }).click();
+  await page.locator('iframe[name="application-ProfitabilityAnalysis-displayActlLineItem-iframe"]').contentFrame().getByRole('button', { name: 'Save  Emphasized' }).click();
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('display actual line items');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Display Actual Line Items' }).click();
+  await page.waitForTimeout(5000);
+});

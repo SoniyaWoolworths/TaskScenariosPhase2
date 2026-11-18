@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME7);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD7);
+  await page.getByText('User Password Language DE -').click();
+  await page.getByLabel('Language').selectOption('DE');
+  await page.getByLabel('Language').selectOption('EN');
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('tab', { name: 'Projects & Assets' }).getByLabel('More').click();
+  await page.getByRole('menuitem', { name: 'Transactions' }).click();
+  await page.getByRole('link', { name: 'Miscellaneous Transactions' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Company Code Required' }).fill('1000');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Company Code Required' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('button', { name: 'Confirm' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Asset Required' }).fill('23921716');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Asset Required' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('button', { name: 'Confirm' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Trans. Type Required' }).fill('101');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).fill('1000');
+   await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('textbox', { name: 'Amount Posted' }).fill('1000');
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('button', { name: 'Post  Emphasized' }).click();
+  await page.waitForTimeout(20000);
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('ABSO');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Miscellaneous Transactions ABSO Tile' }).click();
+  await page.locator('iframe[name="application-ZGUI-ABSO-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.waitForTimeout(5000);
+});

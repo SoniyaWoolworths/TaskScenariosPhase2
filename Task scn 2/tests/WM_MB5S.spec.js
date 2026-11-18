@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME15);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD15);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('button', { name: 'More' }).click();
+  await page.getByRole('menuitem', { name: 'Reporting - Review and' }).click();
+  await page.getByRole('link', { name: 'Display List of GR/IR' }).click();
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Supplier' }).click();
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Supplier' }).fill('8712001');
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Supplier' }).press('Enter');
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Purch. Organization' }).click();
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Purch. Organization' }).fill('1000');
+  await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Purch. Organization' }).press('Enter');
+ await page.locator('iframe[name="application-MaterialInventory-displayGRIRBalancesListInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+  await page.waitForTimeout(30000);
+});

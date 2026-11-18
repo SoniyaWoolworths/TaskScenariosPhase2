@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME15);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD15);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('button', { name: 'More' }).click();
+  await page.getByRole('menuitem', { name: 'Transaction' }).click();
+  await page.getByRole('link', { name: 'My Outbound Delivery Monitor' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByText('MenuBackGet Variant...Display').click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'All Deliveries' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'List Outbound Deliveries' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'Get Variant...' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('dialog', { name: 'Find Variant' }).getByLabel('Created By').click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('dialog', { name: 'Find Variant' }).getByLabel('Created By').press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('dialog', { name: 'Find Variant' }).getByLabel('Created By').fill('');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'Execute (F8)' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'Find...' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Search Term' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Search Term' }).fill('3995');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Search Term' }).press('Enter');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByLabel('Find', { exact: true }).getByRole('button', { name: 'Cancel' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByText('3995 OUTBOUND', { exact: true }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByText('ChooseCancelx').click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Pland Gds Mvmnt Date' }).click();
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Pland Gds Mvmnt Date' }).press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('textbox', { name: 'Pland Gds Mvmnt Date' }).fill('');
+  await page.locator('iframe[name="application-OutboundDelivery-monitoringInWebGUI-iframe"]').contentFrame().getByRole('button', { name: 'Execute Emphasized' }).click();
+ await page.waitForTimeout(5000);
+});

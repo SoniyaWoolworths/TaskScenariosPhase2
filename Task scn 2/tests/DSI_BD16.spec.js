@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapts4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME4);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD4);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('button', { name: 'More' }).click();
+  await page.getByRole('menuitem', { name: 'Master Data' }).click();
+  await page.getByRole('link', { name: 'Send Cost Center' }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('button', { name: 'Get Variant...' }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).fill('');
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('button', { name: 'Execute (F8)' }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByText('COST CENTER', { exact: true }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByText('ChooseCancel').click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('textbox', { name: 'Controlling area Required' }).click();
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('textbox', { name: 'Controlling area Required' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('we02');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Display IDoc WE02 Tile' }).click();
+   await page.locator('iframe[name="application-ZGUI-BD16-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('BD16');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Send Cost Center BD16 Tile' }).click();
+  await page.waitForTimeout(5000);
+});

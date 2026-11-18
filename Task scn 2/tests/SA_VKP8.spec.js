@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME11);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD11);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('tab', { name: 'Service Accounting' }).getByLabel('More').click();
+  await page.getByRole('menuitem', { name: 'Transaction' }).click();
+  await page.getByRole('link', { name: 'Simulate Sales Price' }).click();
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Article' }).click();
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Article' }).fill('135552');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Article' }).press('Enter');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Sales organization' }).click();
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Sales organization' }).fill('1005');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Sales organization' }).press('Enter');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Distribution channel' }).click();
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Distribution channel' }).fill('10');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Distribution channel' }).press('Enter');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Price list' }).click();
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Price list' }).fill('B2');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('textbox', { name: 'Price list' }).press('Enter');
+  await page.locator('iframe[name="application-RetailSalesPricePlan-simulateSalesPriceCalculation-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('simulate sales price calculation');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Simulate Sales Price' }).click();
+  await page.waitForTimeout(5000);});

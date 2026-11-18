@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).click();
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME7);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD7);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('tab', { name: 'Projects & Assets' }).getByLabel('More').click();
+  await page.getByRole('menuitem', { name: 'Reporting - Review and' }).click();
+  await page.getByRole('link', { name: 'General Analyses ME80FN Tile' }).click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('textbox', { name: 'Max. no. of hits' }).click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('textbox', { name: 'Max. no. of hits' }).fill('50');
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('textbox', { name: 'Max. no. of hits' }).press('Enter');
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+  await page.waitForTimeout(10000);
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.waitForTimeout(10000);
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().locator('#C102-mrss-cont-left-Row-0').getByText('7058262117').dblclick();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('tab', { name: 'Quantities/Weights' }).locator('span').click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('tab', { name: 'Delivery Schedule' }).locator('span').click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('tab', { name: 'WOW Extras' }).locator('span').click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('tab', { name: 'Conditions' }).locator('span').click();
+  await page.locator('iframe[name="application-ZGUI-ME80FN-iframe"]').contentFrame().getByRole('tab', { name: 'Purchase Order History' }).locator('span').click();
+  await page.getByRole('button', { name: 'Open Search' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).click();
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('ME80FN');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'ME80FN' }).click();
+  await page.waitForTimeout(5000);
+});

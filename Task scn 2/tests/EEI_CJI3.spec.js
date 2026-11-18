@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://sapus4apps001.wowcorp.com.au:8443/sap/bc/ui2/flp?saml2=disabled');
+  await page.getByRole('textbox', { name: 'User' }).fill(process.env.USERNAME5);
+  await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill(process.env.PASSWORD5);
+  await page.getByRole('button', { name: 'Log On' }).click();
+  await page.getByRole('tab', { name: 'Employee Entitlement and' }).getByLabel('More').click();
+  await page.getByRole('menuitem', { name: 'Reporting - Review and' }).click();
+  await page.getByRole('link', { name: 'Display Actual Costs and' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().locator('#ls-inputfieldhelpbutton').click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('gridcell', { name: 'Row selected. To deselect the' }).locator('div').click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'OK  Emphasized' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'Continue' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('textbox', { name: 'Project' }).fill('H.5220');
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('textbox', { name: 'Project' }).press('Enter');
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'Get' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).press('ControlOrMeta+a');
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('textbox', { name: 'Created By' }).fill('');
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'Execute (F8)' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByText('/EDX_PROJECT').click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'Choose' }).click();
+  await page.locator('iframe[name="application-ProjectObject-analyzeActualCostLineItems-iframe"]').contentFrame().getByRole('button', { name: 'Execute  Emphasized' }).click();
+  await page.waitForTimeout(5000);
+  await page.getByRole('button', { name: 'Open Search' }).click();
+   await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).fill('CJI3');
+  await page.getByRole('searchbox', { name: 'Search In: "Apps"' }).press('Enter');
+  await page.getByRole('link', { name: 'Display Actual Costs and' }).click();
+  await page.waitForTimeout(5000);
+});
